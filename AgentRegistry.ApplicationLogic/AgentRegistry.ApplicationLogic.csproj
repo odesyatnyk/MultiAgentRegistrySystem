@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgentRegistry.Core\AgentRegistry.Core.csproj" />
+    <ProjectReference Include="..\AgentRegistry.DataAccess\AgentRegistry.DataAccess.csproj" />
+    <ProjectReference Include="..\AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
