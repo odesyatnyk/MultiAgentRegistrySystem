@@ -6,13 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 
-namespace AgentRegistry.Server
+namespace AgentRegistry.Bootstrapper
 {
-    public class Startup
+    public class Common
     {
         public static IConfiguration Config { get; protected set; }
 
         public static IServiceProvider ServiceProvider { get; protected set; }
+
+        public static IDataContext DataContext => (IDataContext)ServiceProvider?.GetService(typeof(IDataContext));
 
         public static void Bootstrap()
         {

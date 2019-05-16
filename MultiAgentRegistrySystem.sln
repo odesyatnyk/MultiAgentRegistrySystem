@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Core", "AgentRegistry.Core\AgentRegistry.Core.csproj", "{0F847AF0-7C54-400A-B8A0-867323165769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Core", "AgentRegistry.Core\AgentRegistry.Core.csproj", "{0F847AF0-7C54-400A-B8A0-867323165769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Infrastructure", "AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj", "{58F17856-AB4B-491B-BED7-EBF6F6C341ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Infrastructure", "AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj", "{58F17856-AB4B-491B-BED7-EBF6F6C341ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.DataAccess", "AgentRegistry.DataAccess\AgentRegistry.DataAccess.csproj", "{39219DE2-4FFD-42BD-9D48-5DB05AFC4075}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.DataAccess", "AgentRegistry.DataAccess\AgentRegistry.DataAccess.csproj", "{39219DE2-4FFD-42BD-9D48-5DB05AFC4075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Server", "AgentRegistry.Server\AgentRegistry.Server.csproj", "{197015AC-CAA2-41F4-8372-5D6BFCC58346}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Server", "AgentRegistry.Server\AgentRegistry.Server.csproj", "{197015AC-CAA2-41F4-8372-5D6BFCC58346}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.ApplicationLogic", "AgentRegistry.ApplicationLogic\AgentRegistry.ApplicationLogic.csproj", "{3A0E6DAB-658C-4CAB-9689-0406A278339F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.ApplicationLogic", "AgentRegistry.ApplicationLogic\AgentRegistry.ApplicationLogic.csproj", "{3A0E6DAB-658C-4CAB-9689-0406A278339F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Bootstrapper", "AgentRegistry.Bootstrapper\AgentRegistry.Bootstrapper.csproj", "{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Scanner", "AgentRegistry.Scanner\AgentRegistry.Scanner.csproj", "{CC5C2B92-53A4-4634-AAEC-2757EC29C752}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{3A0E6DAB-658C-4CAB-9689-0406A278339F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A0E6DAB-658C-4CAB-9689-0406A278339F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A0E6DAB-658C-4CAB-9689-0406A278339F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

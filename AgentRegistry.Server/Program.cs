@@ -1,7 +1,5 @@
-﻿
-
-using AgentRegistry.Infrastructure.Common;
-using System;
+﻿using AgentRegistry.Bootstrapper;
+using AgentRegistry.Server.Listener;
 
 namespace AgentRegistry.Server
 {
@@ -9,9 +7,9 @@ namespace AgentRegistry.Server
     {
         static void Main(string[] args)
         {
-            Startup.Bootstrap();
-            var a = Startup.ServiceProvider.GetService(typeof(IDataContext));
-            Console.ReadLine();
+            Common.Bootstrap();
+
+            AsynchronousSocketListener.StartListening();
         }
     }
 }
