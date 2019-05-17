@@ -1,5 +1,8 @@
 ﻿using AgentRegistry.Bootstrapper;
+using AgentRegistry.Client;
 using AgentRegistry.Server.Listener;
+using System;
+using System.Threading.Tasks;
 
 namespace AgentRegistry.Server
 {
@@ -9,7 +12,14 @@ namespace AgentRegistry.Server
         {
             Common.Bootstrap();
 
-            AsynchronousSocketListener.StartListening();
+            Task.Run(() => AsynchronousSocketListener.StartListening());
+
+            while (true)
+            {
+                Console.WriteLine("wait input");
+                if (Console.ReadKey().Key != ConsoleKey.Q)
+                    AsynchronousClient.SendMessage(11001, "Hello");
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Text;
 
-namespace AgentRegistry.Server.Listener
+namespace AgentRegistry.Infrastructure.Common
 {
     public class StateObject
     {

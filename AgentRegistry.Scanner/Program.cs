@@ -13,7 +13,7 @@ namespace AgentRegistry.Scanner
 
             try
             {
-                var task = PortScanner.RunPortScanAsync(10999, 65535);
+                var task = PortScanner.RunPortScanAsync(new System.Collections.Generic.List<int>() { 11001 });
                 task.Wait();
             }
             catch (Exception ex)

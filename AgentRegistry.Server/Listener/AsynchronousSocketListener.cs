@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using AgentRegistry.Infrastructure.Common;
 
 namespace AgentRegistry.Server.Listener
 {

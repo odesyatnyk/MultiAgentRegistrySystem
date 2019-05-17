@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Server", "Age
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.ApplicationLogic", "AgentRegistry.ApplicationLogic\AgentRegistry.ApplicationLogic.csproj", "{3A0E6DAB-658C-4CAB-9689-0406A278339F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Bootstrapper", "AgentRegistry.Bootstrapper\AgentRegistry.Bootstrapper.csproj", "{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Bootstrapper", "AgentRegistry.Bootstrapper\AgentRegistry.Bootstrapper.csproj", "{DA7DF6E4-A206-476B-A76B-CFA022BE8C4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Scanner", "AgentRegistry.Scanner\AgentRegistry.Scanner.csproj", "{CC5C2B92-53A4-4634-AAEC-2757EC29C752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentRegistry.Scanner", "AgentRegistry.Scanner\AgentRegistry.Scanner.csproj", "{CC5C2B92-53A4-4634-AAEC-2757EC29C752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentRegistry.Client", "AgentRegistry.Client\AgentRegistry.Client.csproj", "{056378CA-384E-4AFF-B8B1-904BCCBF6C6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5C2B92-53A4-4634-AAEC-2757EC29C752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056378CA-384E-4AFF-B8B1-904BCCBF6C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056378CA-384E-4AFF-B8B1-904BCCBF6C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056378CA-384E-4AFF-B8B1-904BCCBF6C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056378CA-384E-4AFF-B8B1-904BCCBF6C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

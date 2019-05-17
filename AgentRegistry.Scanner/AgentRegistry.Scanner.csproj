@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AgentRegistry.ApplicationLogic\AgentRegistry.ApplicationLogic.csproj" />
     <ProjectReference Include="..\AgentRegistry.Bootstrapper\AgentRegistry.Bootstrapper.csproj" />
+    <ProjectReference Include="..\AgentRegistry.Client\AgentRegistry.Client.csproj" />
     <ProjectReference Include="..\AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj" />
   </ItemGroup>
 
