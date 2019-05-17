@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AgentRegistry.ApplicationLogic\AgentRegistry.ApplicationLogic.csproj" />
     <ProjectReference Include="..\AgentRegistry.Bootstrapper\AgentRegistry.Bootstrapper.csproj" />
     <ProjectReference Include="..\AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj" />
