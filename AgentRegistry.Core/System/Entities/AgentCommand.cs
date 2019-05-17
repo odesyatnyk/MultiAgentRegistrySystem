@@ -22,5 +22,7 @@ namespace AgentRegistry.Core.System.Entities
         public string CommandName { get; set; }
 
         public string CommandDescription { get; set; }
+
+        public virtual ICollection<AgentCommandResponse> AgentCommandResponses { get; set; }
     }
 }

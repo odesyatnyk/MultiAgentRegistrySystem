@@ -26,6 +26,9 @@ namespace AgentRegistry.Core.System.Entities
         [Column("AgentCommandId")]
         public virtual AgentCommand Command { get; set; }
 
+        [Column("AgentCommandResponseId")]
+        public virtual AgentCommandResponse CommandResponse { get; set; }
+
         [Required]
         public DateTime DateTimeCommunication { get; set; }
 

@@ -12,6 +12,7 @@ namespace AgentRegistry.DataAccess.Context
 
         public DbSet<Agent> Agents { get; set; }
         public DbSet<AgentCommand> AgentCommands { get; set; }
+        public DbSet<AgentCommandResponse> AgentCommandResponses { get; set; }
         public DbSet<AgentsCommunicationLog> AgentsCommunicationLogs { get; set; }
         public DbSet<AgentType> AgentTypes { get; set; }
         public DbSet<ExceptionLog> ExceptionLogs { get; set; }
