@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="System\Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AgentRegistry.Infrastructure\AgentRegistry.Infrastructure.csproj" />
   </ItemGroup>
 

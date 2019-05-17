@@ -9,11 +9,6 @@ namespace AgentRegistry.Core.System.Entities
 {
     public class ExceptionLog : IEntity
     {
-        public ExceptionLog()
-        {
-            DateTimeLogging = DateTime.Now;
-        }
-
         [Key]
         [Column("ExceptionLogId")]
         public int Id { get; protected set; }
