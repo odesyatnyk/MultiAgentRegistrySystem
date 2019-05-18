@@ -95,7 +95,15 @@ namespace AgentRegistry.Server.Listener
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
-                    Send(handler, content);
+                    var command = content.Replace("<EOF>", string.Empty);
+                    var response = string.Empty;
+
+                    SystemHelper.TryCatchDefault(() =>
+                    {
+                        response = CommunicationManager.HandleCommand(command);
+                    });
+
+                    Send(handler, response + "<EOF>");
                 }
                 else
                 {

@@ -58,5 +58,66 @@ namespace AgentRegistry.ApplicationLogic.System
 
             scannerLogRepository.Update(scanSession);
         }
+
+        public List<AvailableAgentDTO> GetAvailableAgents()
+        {
+            var scanSession = dataContext.Set<ScannerLog>()
+                .Where(x => x.IsSuccess ?? false)
+                .OrderByDescending(x => x.DateTimeScanEnd)
+                .First();
+
+            return scanSession.Agents.Select(x => new AvailableAgentDTO
+            {
+                AgentId = x.Id.ToString(),
+                AgentType = x.AgentType.AgentTypeName,
+                IpAddress = x.IpAddress,
+                Port = x.Port.ToString()
+            }).OrderBy(x => x.AgentType).ToList();
+        }
+
+        public List<string> GetAgentCommands(string agentTypeName)
+        {
+            var agentType = dataContext.Set<AgentType>().Single(x => x.AgentTypeName == agentTypeName);
+
+            return agentType.Commands.Select(x => x.CommandName).ToList();
+        }
+
+        public int CreateCommandToAgent(CommandToAgentDTO commandParams)
+        {
+            var scanSession = dataContext.Set<ScannerLog>()
+                .Where(x => x.IsSuccess ?? false)
+                .OrderByDescending(x => x.DateTimeScanEnd)
+                .First();
+
+            var agentFrom = scanSession.Agents.First(x => x.IpAddress == commandParams.Ip && x.Port == commandParams.FromPort);
+
+            var agentTo = scanSession.Agents.First(x => x.IpAddress == commandParams.Ip && x.Port == commandParams.ToPort);
+
+            var command = dataContext.Set<AgentCommand>().First(x => x.AgentType.Id == agentTo.AgentType.Id && x.CommandName == commandParams.CommandName);
+
+            var agentCommunicationLog = new AgentsCommunicationLog
+            {
+                AgentFrom = agentFrom,
+                AgentTo = agentTo,
+                DateTimeCommunication = DateTime.Now,
+                Command = command
+            };
+
+            dataContext.Add(agentCommunicationLog);
+            dataContext.SaveChanges();
+
+            return agentCommunicationLog.Id;
+        }
+
+        public void CompleteAgentCommand(int idCommand, string responseCode)
+        {
+            var communicationLog = dataContext.Set<AgentsCommunicationLog>().Single(x => x.Id == idCommand);
+
+            var response = dataContext.Set<AgentCommandResponse>().Single(x => x.AgentCommand.Id == communicationLog.Command.Id && x.ResponseCode == responseCode);
+
+            communicationLog.IsSuccess = true;
+            communicationLog.CommandResponse = response;
+            dataContext.SaveChanges();
+        }
     }
 }

@@ -14,12 +14,7 @@ namespace AgentRegistry.Server
 
             Task.Run(() => AsynchronousSocketListener.StartListening());
 
-            while (true)
-            {
-                Console.WriteLine("wait input");
-                if (Console.ReadKey().Key != ConsoleKey.Q)
-                    AsynchronousClient.SendMessage(11001, "Hello");
-            }
+            Console.ReadLine();
         }
     }
 }

@@ -11,16 +11,16 @@ namespace AgentRegistry.Client
 {
     public class AsynchronousClient
     {
-        private static int _port;
+        private int _port;
 
-        private static ManualResetEvent connectDone = new ManualResetEvent(false);
-        private static ManualResetEvent sendDone = new ManualResetEvent(false);
-        private static ManualResetEvent receiveDone = new ManualResetEvent(false);
+        private ManualResetEvent connectDone = new ManualResetEvent(false);
+        private ManualResetEvent sendDone = new ManualResetEvent(false);
+        private ManualResetEvent receiveDone = new ManualResetEvent(false);
 
-        private static string response = string.Empty;
-        private static bool _releaseSockets;
+        private string response = string.Empty;
+        private bool _releaseSockets;
 
-        public static string SendMessage(int port, string message, bool releaseSockects = false)
+        public string SendMessage(int port, string message, bool releaseSockects = false)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace AgentRegistry.Client
             return response;
         }
 
-        private static void ConnectCallback(IAsyncResult ar)
+        private void ConnectCallback(IAsyncResult ar)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace AgentRegistry.Client
             }
         }
 
-        private static void Receive(Socket client)
+        private void Receive(Socket client)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace AgentRegistry.Client
             }
         }
 
-        private static void ReceiveCallback(IAsyncResult ar)
+        private void ReceiveCallback(IAsyncResult ar)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace AgentRegistry.Client
             }
         }
 
-        private static void Send(Socket client, String data)
+        private void Send(Socket client, String data)
         {
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
@@ -130,7 +130,7 @@ namespace AgentRegistry.Client
                 new AsyncCallback(SendCallback), client);
         }
 
-        private static void SendCallback(IAsyncResult ar)
+        private void SendCallback(IAsyncResult ar)
         {
             try
             {

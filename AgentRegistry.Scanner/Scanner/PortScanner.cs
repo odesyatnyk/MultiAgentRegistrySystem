@@ -114,7 +114,7 @@ namespace AgentRegistry.Scanner
 
                 await Task.Run(() => socket.Connect(Host, port));
 
-                var response = AsynchronousClient.SendMessage(port, "check", releaseSockects: true);
+                var response = new AsynchronousClient().SendMessage(port, "check", releaseSockects: true);
 
                 return response;
             }
