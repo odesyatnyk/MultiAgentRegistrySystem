@@ -1,6 +1,8 @@
-﻿using AgentRegistry.Bootstrapper;
+﻿using AgentRegistry.ApplicationLogic.System;
+using AgentRegistry.Bootstrapper;
 using AgentRegistry.Infrastructure.Common;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgentRegistry.Scanner
@@ -11,18 +13,28 @@ namespace AgentRegistry.Scanner
         {
             Common.Bootstrap();
 
-            try
+            int idScanSession = 0;
+
+            Common.DataContext.TryBeginCommitTransaction(() =>
             {
-                var task = PortScanner.RunPortScanAsync(new System.Collections.Generic.List<int>() { 11001 });
+                idScanSession = new SystemManager(Common.DataContext).StartScanSession();
+            });
+
+            ScanResultDTO scanResult = null;
+
+            SystemHelper.TryCatchDefault(() =>
+            {
+                var task = PortScanner.RunPortScanAsync(Enumerable.Range(11001, 5));
                 task.Wait();
-            }
-            catch (Exception ex)
+                scanResult = task.Result;
+            });
+
+            Common.DataContext.TryBeginCommitTransaction(() =>
             {
-                Console.WriteLine("  error : {0}",
-                    ex.InnerException != null
-                        ? ex.InnerException.Message
-                        : ex.Message);
-            }
+                new SystemManager(Common.DataContext).CompleteScanSession(idScanSession, scanResult);
+            });
+
+            Console.ReadKey();
         }
     }
 }

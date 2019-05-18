@@ -18,13 +18,15 @@ namespace AgentRegistry.Client
         private static ManualResetEvent receiveDone = new ManualResetEvent(false);
 
         private static string response = string.Empty;
+        private static bool _releaseSockets;
 
-        public static string SendMessage(int port, string message)
+        public static string SendMessage(int port, string message, bool releaseSockects = false)
         {
             try
             {
                 _port = port;
                 response = string.Empty;
+                _releaseSockets = releaseSockects;
 
                 IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
                 IPAddress ipAddress = ipHostInfo.AddressList.First(x => x.AddressFamily == AddressFamily.InterNetwork);
@@ -42,6 +44,11 @@ namespace AgentRegistry.Client
 
                 Console.WriteLine("Response received : {0}", response);
 
+                if (releaseSockects)
+                {
+                    client.Shutdown(SocketShutdown.Both);
+                    client.Close();
+                }
             }
             catch (Exception e)
             {

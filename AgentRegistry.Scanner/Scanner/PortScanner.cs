@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AgentRegistry.Client;
+using AgentRegistry.Infrastructure.Common;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -15,10 +17,10 @@ namespace AgentRegistry.Scanner
         private const int MinPort = 1;
         private const int MaxPort = 65535;
         private readonly IEnumerable<int> _portsToScan = new List<int>();
-        private List<int> _openPorts = new List<int>();
+        private List<OpenPortDTO> _openPorts = new List<OpenPortDTO>();
         private List<int> _closedPorts = new List<int>();
 
-        public ReadOnlyCollection<int> OpenPorts => new ReadOnlyCollection<int>(_openPorts);
+        public ReadOnlyCollection<OpenPortDTO> OpenPorts => new ReadOnlyCollection<OpenPortDTO>(_openPorts);
 
         public ReadOnlyCollection<int> ClosedPorts => new ReadOnlyCollection<int>(_closedPorts);
 
@@ -67,7 +69,7 @@ namespace AgentRegistry.Scanner
             portScanner.LastPortScanSummary();
         }
 
-        public static async Task RunPortScanAsync(IEnumerable<int> portsToScan)
+        public static async Task<ScanResultDTO> RunPortScanAsync(IEnumerable<int> portsToScan)
         {
             Console.WriteLine($"Checking specified range of ports on {Host}...\n");
 
@@ -82,11 +84,13 @@ namespace AgentRegistry.Scanner
 
             await portScanner.ScanAsync(progress);
             portScanner.LastPortScanSummary();
+
+            return new ScanResultDTO(portScanner._openPorts, portScanner._closedPorts, Host);
         }
 
         public void LastPortScanSummary()
         {
-            string openPorts = !_openPorts.Any() ? _openPorts.Count.ToString() : string.Join(",", _openPorts);
+            string openPorts = !_openPorts.Any() ? _openPorts.Count.ToString() : string.Join(",", _openPorts.Select(x => x.Port).ToList());
 
             string closedPorts = !_closedPorts.Any() ? _openPorts.Count.ToString() : string.Join(",", _closedPorts);
 
@@ -100,7 +104,7 @@ namespace AgentRegistry.Scanner
             Console.WriteLine();
         }
 
-        public async Task<bool> IsPortOpenAsync(int port)
+        public async Task<string> IsPortOpenAsync(int port)
         {
             Socket socket = null;
 
@@ -110,12 +114,14 @@ namespace AgentRegistry.Scanner
 
                 await Task.Run(() => socket.Connect(Host, port));
 
-                return true;
+                var response = AsynchronousClient.SendMessage(port, "check", releaseSockects: true);
+
+                return response;
             }
             catch (SocketException ex)
             {
                 if (ex.SocketErrorCode == SocketError.ConnectionRefused)
-                    return false;
+                    return string.Empty;
 
                 Debug.WriteLine(ex.ToString());
                 Console.WriteLine(ex);
@@ -128,14 +134,20 @@ namespace AgentRegistry.Scanner
                 socket?.Close();
             }
 
-            return false;
+            return string.Empty;
         }
 
         private async Task CheckPortAsync(int port, IProgress<PortScanResult> progress)
         {
-            if (await IsPortOpenAsync(port))
+            string response = await IsPortOpenAsync(port);
+
+            if (!string.IsNullOrWhiteSpace(response))
             {
-                _openPorts.Add(port);
+                _openPorts.Add(new OpenPortDTO {
+                    Port = port,
+                    AgentType = response.Replace("<EOF>", "")
+                });
+
                 progress?.Report(new PortScanResult { PortNum = port, IsPortOpen = true });
             }
             else
@@ -153,7 +165,7 @@ namespace AgentRegistry.Scanner
 
         private void SetupLists()
         {
-            _openPorts = new List<int>();
+            _openPorts = new List<OpenPortDTO>();
             _closedPorts = new List<int>();
         }
     }
